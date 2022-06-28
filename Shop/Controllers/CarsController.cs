@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shop.Data.Interfaces;
+using Shop.ViewModels;
 
 namespace Shop.Controllers
 {
@@ -20,9 +21,12 @@ namespace Shop.Controllers
 
         public ViewResult List()
         {
+            ViewBag.Title = "Страница с автомобилями";
+            CarsListViewModel obj = new CarsListViewModel();
+            obj.allCars = _allCars.Cars;
+            obj.currCategory = "Автомобили";
+            return View(obj);
 
-            var cars = _allCars.Cars;
-            return View(cars);
 
         }
     }

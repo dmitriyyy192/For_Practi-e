@@ -1,19 +1,18 @@
 ﻿using Shop.Data.Interfaces;
+using Shop.Data.Mocks;
 using Shop.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Shop.Data.Mocks
+public class MockCars : IAllCars
 {
-    public class MockCars : IAllCars
+    private readonly ICarsCategory _categoryCars = new MockCategory();
+    public IEnumerable<Car> Cars
     {
-        private readonly ICarsCategory _categoryCars = new MockCategory();
-        public IEnumerable<Car> Cars
-        {
-            get
-            {//создание проектов в коде а не в базе
-                return new List<Car>
+        get
+        {//создание проектов в коде а не в базе
+            return new List<Car>
                 {//создаем  объект
                     new Car
                     {
@@ -71,13 +70,12 @@ namespace Shop.Data.Mocks
                         Category=_categoryCars.AllCategories.First()
                     }
                     };
-            }
         }
-        public IEnumerable<Car> getFavCars { get; set; }
+    }
+    public IEnumerable<Car> getFavCars { get; set; }
 
-        public Car getobjectCar(int carId)
-        {
-            throw new NotImplementedException();
-        }
+    public Car getobjectCar(int carId)
+    {
+        throw new NotImplementedException();
     }
 }
